@@ -40,7 +40,7 @@ router.post('/add', async (req, res) => {
 
           await bookDetails.save();            
           
-          res.status(201).json({message : "Book Saved!", bookDetails})
+          res.status(201).json({message : "Book Added!", bookDetails})
       
           } catch(err){
       console.log(err)
@@ -54,7 +54,7 @@ router.put('/edit/:id', async (req, res) => {
   const {name, poster, rating, summary} = req.body;
 
     try {
-      const updatedAllBooks = await AllBook.updateOne({id:id}, { name, poster, rating, summary}, { new: true });
+      const updatedAllBooks = await AllBook.updateOne({_id:id}, { name, poster, rating, summary}, { new: true });
       res.status(201).json({message : "Book details Updated!", book: updatedAllBooks});
       if (!updatedAllBooks) {
         return res.status(404).json({ message: "Book not found" });
@@ -68,7 +68,7 @@ router.delete('/:id', async (req, res) => {
   const id  = req.params.id;
 
   try {
-    await AllBook.findByIdAndDelete({id:id})
+    await AllBook.findByIdAndDelete({_id:id})
     res.status(204).json({ message: 'Book deleted successfully' });
   } catch (error) {
     res.status(500).json({ message: 'Error deleting Book', error });
