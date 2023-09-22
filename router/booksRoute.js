@@ -36,7 +36,7 @@ router.post('/add', async (req, res) => {
 
   try {
               
-          const bookDetails = new AllBook({name, poster, rating, summary});
+          const bookDetails = new AllBook({name : name, poster : poster, rating : rating, summary : summary});
 
           await bookDetails.save();            
           
