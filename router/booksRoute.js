@@ -58,7 +58,7 @@ router.put('/status/:id', async (req, res) => {
   try {
     const currentStatus = await AllBook.updateOne(({_id : id}), {$set: {status : status}}, {new : true});          
           
-    if(currentStatus){res.status(201).json({message : "Mentor Assigned!", currentStatus})}
+    if(currentStatus){res.status(201).json({message : "Status Updated!", currentStatus})}
   } catch (error) {
     console.log(error)
   }
