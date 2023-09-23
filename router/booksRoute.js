@@ -20,7 +20,7 @@ router.get('/books', async (req, res) => {
 router.get('/books/:id', async (req, res) => {
   const id = req.params.id;
   try {
-    const book = await AllBook.findOne({id:id});
+    const book = await AllBook.findOne({_id:id});
     res.send(book);
   } catch (error) {
     res.status(500).json({ message: 'Error retrieving Books' });
@@ -31,16 +31,21 @@ router.get('/books/:id', async (req, res) => {
 
 router.post('/add', async (req, res) => {
 
-  const {name, poster, rating, summary} = req.body;
-
+  const {name, poster, author, summary} = req.body;
 
   try {
+
+          const existingBook = await AllBook.findOne({name : name, author : author})
+          if(existingBook){
+            res.status(400).json({message : 'Book already exists!'})
+          }else if (!existingBook){
               
-          const bookDetails = new AllBook({name : name, poster : poster, rating : rating, summary : summary});
+          const bookDetails = new AllBook({name : name, poster : poster, author : author, summary : summary});
 
           await bookDetails.save();            
           
           res.status(201).json({message : "Book Added!", bookDetails})
+          }
       
           } catch(err){
       console.log(err)
@@ -51,11 +56,11 @@ router.put('/edit/:id', async (req, res) => {
 
   const id = req.params.id;
 
-  const {name, poster, rating, summary} = req.body;
+  const {name, poster, author, summary} = req.body;
 
     try {
-      const updatedAllBooks = await AllBook.findByIdAndUpdate({_id:id}, { name : name, poster : poster, rating : rating, summary : summary}, { new: true });
-      res.status(201).json({message : "Book details Updated!", book: updatedAllBooks});
+      const updatedAllBooks = await AllBook.findByIdAndUpdate({_id:id}, { name : name, poster : poster, author : author, summary : summary}, { new: true });
+      res.status(201).json({message : "Book details Updated!"});
       if (!updatedAllBooks) {
         return res.status(404).json({ message: "Book not found" });
       }

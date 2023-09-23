@@ -1,19 +1,10 @@
 import mongoose from 'mongoose'
 
 const allBookData = new mongoose.Schema({
-    bookName : {
-        type : String
-    },
-    poster : {
-        type : String
-    },
-    rating : {
-        type : Number
-    },
-    summary : {
-        type : String
-    }
-    
+    name : String,
+    poster : String,
+    author : String,
+    summary : String    
 })
 
 const AllBook = mongoose.model('ALLBOOK', allBookData);
