@@ -52,18 +52,6 @@ router.post('/add', async (req, res) => {
   }
 });
 
-router.post('/status/:id', async (req, res) => {
-  const id = req.params.id;
-  const {status} = req.body
-  try {
-    const currentStatus = await AllBook.updateOne(({_id : id}), {$set: {status : status}}, {new : true});          
-          
-    if(currentStatus){res.status(201).json({message : "Status Updated!", currentStatus})}
-  } catch (error) {
-    console.log(error)
-  }
-})
-
 router.put('/edit/:id', async (req, res) => {
 
   const id = req.params.id;
