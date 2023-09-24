@@ -19,7 +19,7 @@ app.listen(PORT, () => console.log("Server starting on port", PORT));
 
 app.use(
   cors({
-    origin: ["http://localhost:3000"],
+    origin: ["https://ss-library-management-system.netlify.app"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
