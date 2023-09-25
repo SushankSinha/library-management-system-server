@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 import express from "express";
 import mongoose from 'mongoose';
 import cors from "cors";
-import user from './router/userRoute.js'
+import books from './router/bookRoute.js'
 
 dotenv.config({path : './.env'});
 const app = express();
@@ -27,4 +27,4 @@ app.use(
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json())
-app.use(user)
+app.use(books)
