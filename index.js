@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 import express from "express";
 import mongoose from 'mongoose';
 import cors from "cors";
-import books from './router/booksRoute.js'
+import user from './router/userRoute.js'
 
 dotenv.config({path : './.env'});
 const app = express();
@@ -19,7 +19,7 @@ app.listen(PORT, () => console.log("Server starting on port", PORT));
 
 app.use(
   cors({
-    origin: ["https://ss-library-management-system.netlify.app"],
+    origin: ["http://localhost:3000"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
@@ -27,4 +27,4 @@ app.use(
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json())
-app.use(books)
+app.use(user)
