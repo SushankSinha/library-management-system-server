@@ -35,7 +35,7 @@ router.post('/add', async (req, res) => {
 
   try {
 
-          const existingBook = await AllBook.findOne({name : name, author : author})
+          const existingBook = await AllBook.findOne({name : name}&&{author : author})
           if(existingBook){
             res.status(400).json({message : 'Book already exists!'})
           }else if (!existingBook){
